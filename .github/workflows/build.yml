@@ -51,3 +51,6 @@ jobs:
           echo "JAVA_HOME: $JAVA_HOME"
           cd powervision-sdk-demo/gcs_api/
           ./gradlew clean assembleDebug
+
+      - name: Find APK
+        run: find . -name "*.apk"
