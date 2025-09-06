@@ -31,6 +31,9 @@ jobs:
           # ls -alh .
           ls -alh jdk-11.0.2
           # ls -alh openjdk-11.0.2_linux-x64_bin
+          echo "$(pwd)/jdk-11.0.2" > java_home
+          cat java_home
+          echo "JAVA_HOME=$(pwd)/jdk-11.0.2" >> "$GITHUB_ENV"
 
       - name: Check JAVA_HOME
         run: |
