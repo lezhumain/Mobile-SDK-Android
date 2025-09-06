@@ -50,4 +50,4 @@ jobs:
           export JAVA_HOME="$(pwd)/jdk-11.0.2"
           echo "JAVA_HOME: $JAVA_HOME"
           cd powervision-sdk-demo/gcs_api/
-          ./gradlew clean assembleDebug installDebug
+          ./gradlew clean assembleDebug
