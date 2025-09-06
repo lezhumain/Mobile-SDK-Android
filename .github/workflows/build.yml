@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # see available versions here: https://github.com/actions/setup-java
-        java-version: [11, 17, 21]
+        java-version: [17, 21]
 
     steps:
       - uses: actions/checkout@v4
