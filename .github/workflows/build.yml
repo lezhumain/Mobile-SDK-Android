@@ -46,6 +46,8 @@ jobs:
       - name: Build
         run: |
           echo "JAVA_HOME=$(pwd)/jdk-11.0.2" >> "$GITHUB_ENV"
-          echo "$JAVA_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          export JAVA_HOME="$(pwd)/jdk-11.0.2"
+          echo "JAVA_HOME: $JAVA_HOME"
           cd powervision-sdk-demo/gcs_api/
           ./gradlew clean assembleDebug installDebug
