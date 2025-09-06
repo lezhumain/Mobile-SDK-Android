@@ -28,7 +28,9 @@ jobs:
         run: |
           curl https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O
           tar -xvzf *.tar.gz
-          ls -alh openjdk-11.0.2_linux-x64_bin
+          # ls -alh .
+          ls -alh jdk-11.0.2
+          # ls -alh openjdk-11.0.2_linux-x64_bin
 
       - name: Check JAVA_HOME
         run: |
