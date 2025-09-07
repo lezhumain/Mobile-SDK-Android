@@ -24,15 +24,15 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'oracle'
 
-      - name: Install Java 11
-        run: |
-          curl https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O
-          tar -xvzf *.tar.gz
-          # ls -alh .
-          ls -alh jdk-11.0.2
-          # ls -alh openjdk-11.0.2_linux-x64_bin
-          echo "$(pwd)/jdk-11.0.2" > java_home
-          cat java_home
+#      - name: Install Java 11
+#        run: |
+#          curl https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O
+#          tar -xvzf *.tar.gz
+#          # ls -alh .
+#          ls -alh jdk-11.0.2
+#          # ls -alh openjdk-11.0.2_linux-x64_bin
+#          echo "$(pwd)/jdk-11.0.2" > java_home
+#          cat java_home
 
       - name: Check JAVA_HOME
         run: |
@@ -45,10 +45,10 @@ jobs:
 
       - name: Build
         run: |
-          echo "JAVA_HOME=$(pwd)/jdk-11.0.2" >> "$GITHUB_ENV"
+          # echo "JAVA_HOME=$(pwd)/jdk-11.0.2" >> "$GITHUB_ENV"
           echo "JAVA_HOME: $JAVA_HOME"
-          export JAVA_HOME="$(pwd)/jdk-11.0.2"
-          echo "JAVA_HOME: $JAVA_HOME"
+          # export JAVA_HOME="$(pwd)/jdk-11.0.2"
+          # echo "JAVA_HOME: $JAVA_HOME"
           cd powervision-sdk-demo/gcs_api/
           ./gradlew clean assembleDebug
 
