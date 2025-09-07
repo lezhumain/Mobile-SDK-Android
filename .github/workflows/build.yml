@@ -1,0 +1,56 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Build
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # see available versions here: https://github.com/actions/setup-java
+        java-version: [21]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'oracle'
+
+#      - name: Install Java 11
+#        run: |
+#          curl https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O
+#          tar -xvzf *.tar.gz
+#          # ls -alh .
+#          ls -alh jdk-11.0.2
+#          # ls -alh openjdk-11.0.2_linux-x64_bin
+#          echo "$(pwd)/jdk-11.0.2" > java_home
+#          cat java_home
+
+      - name: Check JAVA_HOME
+        run: |
+          echo "$JAVA_HOME"
+          java -version
+          javac -version
+
+      - name: Setup Android SDK
+        uses: Swisyn/setup-android-sdk@v1
+
+      - name: Build
+        run: |
+          # echo "JAVA_HOME=$(pwd)/jdk-11.0.2" >> "$GITHUB_ENV"
+          echo "JAVA_HOME: $JAVA_HOME"
+          # export JAVA_HOME="$(pwd)/jdk-11.0.2"
+          # echo "JAVA_HOME: $JAVA_HOME"
+          cd powervision-sdk-demo/gcs_api/
+          ./gradlew clean assembleDebug
+
+      - name: Find APK
+        run: find . -name "*.apk"

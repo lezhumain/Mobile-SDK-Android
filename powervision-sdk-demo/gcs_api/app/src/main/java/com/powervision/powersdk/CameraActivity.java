@@ -5,8 +5,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,106 +32,58 @@ import com.vxfly.vflibrary.video.VFSurfaceView;
 import com.vxfly.vflibrary.video.VFVideo;
 import com.vxfly.vflibrary.video.VFVideoListener;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 
 public class CameraActivity extends AppCompatActivity {
     private static final String TAG = CameraActivity.class.getSimpleName();
 
-    @BindView(R.id.camera_video_view)
-    VFSurfaceView mVideoSurfaceView;
-    @BindView(R.id.camera_mode)
-    Button cameraMode;
-    @BindView(R.id.camera_action)
-    Button cameraAction;
-    @BindView(R.id.camera_settings)
-    Button cameraSettings;
-    @BindView(R.id.camera_conn)
-    Button cameraConn;
-    @BindView(R.id.control_top)
-    Button controlTop;
-    @BindView(R.id.contral_left)
-    Button contralLeft;
-    @BindView(R.id.contral_right)
-    Button contralRight;
-    @BindView(R.id.contral_bottom)
-    Button contralBottom;
+    private VFSurfaceView mVideoSurfaceView;
+    private Button cameraMode;
+    private Button cameraAction;
+    private Button cameraSettings;
+    private Button cameraConn;
+    private Button controlTop;
+    private Button contralLeft;
+    private Button contralRight;
+    private Button contralBottom;
 
-    @BindView(R.id.camera_setting_layout)
-    ScrollView cameraSettingLayout;
-    @BindView(R.id.battery_info)
-    TextView batteryInfo;
-    @BindView(R.id.battery_temperature)
-    TextView batteryTemperature;
-    @BindView(R.id.battery_electricity)
-    TextView batteryElectricity;
-    @BindView(R.id.battery_capacity)
-    TextView batteryCapacity;
-    @BindView(R.id.battery_cycles)
-    TextView batteryCycles;
+    private ScrollView cameraSettingLayout;
+    private TextView batteryInfo;
+    private TextView batteryTemperature;
+    private TextView batteryElectricity;
+    private TextView batteryCapacity;
+    private TextView batteryCycles;
 
-    @BindView(R.id.control_mode)
-    Button controlMode;
-    @BindView(R.id.remote_control_japan)
-    Button remoteControlJapan;
-    @BindView(R.id.remote_control_america)
-    Button remoteControlAmerica;
-    @BindView(R.id.remote_control_layout)
-    LinearLayout remoteControlLayout;
+    private Button controlMode;
+    private Button remoteControlJapan;
+    private Button remoteControlAmerica;
+    private LinearLayout remoteControlLayout;
 
-    @BindView(R.id.iso_spinner)
-    Spinner isoSpinner;
-    @BindView(R.id.aperture_spinner)
-    Spinner apertureSpinner;
-    @BindView(R.id.ev_spinner)
-    Spinner evSpinner;
-    @BindView(R.id.shutter_speed_spinner)
-    Spinner shutterSpeedSpinner;
-    @BindView(R.id.record_shutter_speed_spinner)
-    Spinner recordShutterSpeedSpinner;
-    @BindView(R.id.single_shot_spinner)
-    Spinner singleShotSpinner;
-    @BindView(R.id.continuous_shot_spinner)
-    Spinner continuousShotSpinner;
-    @BindView(R.id.timing_shot_spinner)
-    Spinner timingShotSpinner;
-    @BindView(R.id.photo_size_spinner)
-    Spinner photoSizeSpinner;
-    @BindView(R.id.photo_quality_spinner)
-    Spinner photoQualitySpinner;
-    @BindView(R.id.record_spinner)
-    Spinner recordSpinner;
-    @BindView(R.id.white_balance_spinner)
-    Spinner whiteBalanceSpinner;
-    @BindView(R.id.brightness_spinner)
-    Spinner brightnessSpinner;
-    @BindView(R.id.saturation_spinner)
-    Spinner saturationSpinner;
-    @BindView(R.id.contrast_spinner)
-    Spinner contrastSpinner;
-    @BindView(R.id.metering_mode_spinner)
-    Spinner meteringModeSpinner;
-    @BindView(R.id.af_mode_spinner)
-    Spinner afModeSpinner;
-    @BindView(R.id.osd_spinner)
-    Spinner osdSpinner;
-    @BindView(R.id.image_sharpness_spinner)
-    Spinner imageSharpnessSpinner;
+    private Spinner isoSpinner;
+    private Spinner apertureSpinner;
+    private Spinner evSpinner;
+    private Spinner shutterSpeedSpinner;
+    private Spinner recordShutterSpeedSpinner;
+    private Spinner singleShotSpinner;
+    private Spinner continuousShotSpinner;
+    private Spinner timingShotSpinner;
+    private Spinner photoSizeSpinner;
+    private Spinner photoQualitySpinner;
+    private Spinner recordSpinner;
+    private Spinner whiteBalanceSpinner;
+    private Spinner brightnessSpinner;
+    private Spinner saturationSpinner;
+    private Spinner contrastSpinner;
+    private Spinner meteringModeSpinner;
+    private Spinner afModeSpinner;
+    private Spinner osdSpinner;
+    private Spinner imageSharpnessSpinner;
 
-    @BindView(R.id.take_picture_capacity)
-    Button takePictureCapacity;
-    @BindView(R.id.reset)
-    Button reset;
-    @BindView(R.id.format_sd_card)
-    Button formatSdCard;
-    @BindView(R.id.camera_setting_hide)
-    Button cameraSettingHide;
-    @BindView(R.id.set_white_balance)
-    Button setWhiteBalance;
-    @BindView(R.id.white_balance_value)
-    TextView whiteBalanceValue;
+    private Button takePictureCapacity;
+    private Button reset;
+    private Button formatSdCard;
+    private Button cameraSettingHide;
+    private Button setWhiteBalance;
+    private TextView whiteBalanceValue;
 
     private boolean isRecording = false;
     boolean isInitSpinner = true;
@@ -150,11 +102,81 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        ButterKnife.bind(this);
+        initViews();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mPowerSDK = PowerSDK.getInstance();
         initVideoView();
         initCameraSettingView();
+    }
+
+    private void initViews() {
+        mVideoSurfaceView = findViewById(R.id.camera_video_view);
+        cameraMode = findViewById(R.id.camera_mode);
+        cameraAction = findViewById(R.id.camera_action);
+        cameraSettings = findViewById(R.id.camera_settings);
+        cameraConn = findViewById(R.id.camera_conn);
+        controlTop = findViewById(R.id.control_top);
+        contralLeft = findViewById(R.id.contral_left);
+        contralRight = findViewById(R.id.contral_right);
+        contralBottom = findViewById(R.id.contral_bottom);
+
+        cameraSettingLayout = findViewById(R.id.camera_setting_layout);
+        batteryInfo = findViewById(R.id.battery_info);
+        batteryTemperature = findViewById(R.id.battery_temperature);
+        batteryElectricity = findViewById(R.id.battery_electricity);
+        batteryCapacity = findViewById(R.id.battery_capacity);
+        batteryCycles = findViewById(R.id.battery_cycles);
+
+        controlMode = findViewById(R.id.control_mode);
+        remoteControlJapan = findViewById(R.id.remote_control_japan);
+        remoteControlAmerica = findViewById(R.id.remote_control_america);
+        remoteControlLayout = findViewById(R.id.remote_control_layout);
+
+        isoSpinner = findViewById(R.id.iso_spinner);
+        apertureSpinner = findViewById(R.id.aperture_spinner);
+        evSpinner = findViewById(R.id.ev_spinner);
+        shutterSpeedSpinner = findViewById(R.id.shutter_speed_spinner);
+        recordShutterSpeedSpinner = findViewById(R.id.record_shutter_speed_spinner);
+        singleShotSpinner = findViewById(R.id.single_shot_spinner);
+        continuousShotSpinner = findViewById(R.id.continuous_shot_spinner);
+        timingShotSpinner = findViewById(R.id.timing_shot_spinner);
+        photoSizeSpinner = findViewById(R.id.photo_size_spinner);
+        photoQualitySpinner = findViewById(R.id.photo_quality_spinner);
+        recordSpinner = findViewById(R.id.record_spinner);
+        whiteBalanceSpinner = findViewById(R.id.white_balance_spinner);
+        brightnessSpinner = findViewById(R.id.brightness_spinner);
+        saturationSpinner = findViewById(R.id.saturation_spinner);
+        contrastSpinner = findViewById(R.id.contrast_spinner);
+        meteringModeSpinner = findViewById(R.id.metering_mode_spinner);
+        afModeSpinner = findViewById(R.id.af_mode_spinner);
+        osdSpinner = findViewById(R.id.osd_spinner);
+        imageSharpnessSpinner = findViewById(R.id.image_sharpness_spinner);
+
+        takePictureCapacity = findViewById(R.id.take_picture_capacity);
+        reset = findViewById(R.id.reset);
+        formatSdCard = findViewById(R.id.format_sd_card);
+        cameraSettingHide = findViewById(R.id.camera_setting_hide);
+        setWhiteBalance = findViewById(R.id.set_white_balance);
+        whiteBalanceValue = findViewById(R.id.white_balance_value);
+
+        // Set click listeners
+        cameraMode.setOnClickListener(this::onViewClicked);
+        cameraAction.setOnClickListener(this::onViewClicked);
+        cameraSettings.setOnClickListener(this::onViewClicked);
+        controlTop.setOnClickListener(this::onViewClicked);
+        contralLeft.setOnClickListener(this::onViewClicked);
+        contralRight.setOnClickListener(this::onViewClicked);
+        contralBottom.setOnClickListener(this::onViewClicked);
+        cameraConn.setOnClickListener(this::onViewClicked);
+        batteryInfo.setOnClickListener(this::onViewClicked);
+        controlMode.setOnClickListener(this::onViewClicked);
+        remoteControlJapan.setOnClickListener(this::onViewClicked);
+        remoteControlAmerica.setOnClickListener(this::onViewClicked);
+        takePictureCapacity.setOnClickListener(this::onViewClicked);
+        reset.setOnClickListener(this::onViewClicked);
+        formatSdCard.setOnClickListener(this::onViewClicked);
+        cameraSettingHide.setOnClickListener(this::onViewClicked);
+        setWhiteBalance.setOnClickListener(this::onViewClicked);
     }
 
     /**
@@ -517,64 +539,42 @@ public class CameraActivity extends AppCompatActivity {
         }
     };
 
-    @OnClick({R.id.camera_mode, R.id.camera_action, R.id.camera_settings, R.id.control_top,
-            R.id.contral_left, R.id.contral_right, R.id.contral_bottom, R.id.camera_conn,
-            R.id.battery_info, R.id.control_mode, R.id.remote_control_japan, R.id.remote_control_america,
-            R.id.take_picture_capacity, R.id.reset, R.id.format_sd_card,
-            R.id.camera_setting_hide, R.id.set_white_balance})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.camera_mode:
-                switchCameraMode();
-                break;
-            case R.id.camera_action:
-                startRecodOrTakePhoto();
-                break;
-            case R.id.camera_settings:
-                startCameraSetting();
-                break;
-            case R.id.contral_left:
-                controlGimbal(0);
-                break;
-            case R.id.control_top:
-                controlGimbal(1);
-                break;
-            case R.id.contral_right:
-                controlGimbal(2);
-                break;
-            case R.id.contral_bottom:
-                controlGimbal(3);
-                break;
-            case R.id.camera_conn:
-                startConnection();
-                break;
-            case R.id.battery_info:
-                startGetBatteryInfo();
-                break;
-            case R.id.control_mode:
-                getRemoteControllerMode();
-                break;
-            case R.id.remote_control_japan://
-                setRemoteControlMode(1);
-                break;
-            case R.id.remote_control_america:
-                setRemoteControlMode(2);
-                break;
-            case R.id.take_picture_capacity://剩余拍照数量
-                mPowerSDK.startRequestParameter(PVParameter.PV_CAM_SD_PLEFT);
-                break;
-            case R.id.reset://恢复出厂设置
-                mPowerSDK.resetFactorySetting(7);//
-                break;
-            case R.id.format_sd_card://格式化sdk卡
-                mPowerSDK.formatSdCard(6);
-                break;
-            case R.id.camera_setting_hide:
-                hideCameraSetting();
-                break;
-            case R.id.set_white_balance:
-                setWhiteBalance();
-                break;
+        int id = view.getId();
+        if (id == R.id.camera_mode) {
+            switchCameraMode();
+        } else if (id == R.id.camera_action) {
+            startRecodOrTakePhoto();
+        } else if (id == R.id.camera_settings) {
+            startCameraSetting();
+        } else if (id == R.id.contral_left) {
+            controlGimbal(0);
+        } else if (id == R.id.control_top) {
+            controlGimbal(1);
+        } else if (id == R.id.contral_right) {
+            controlGimbal(2);
+        } else if (id == R.id.contral_bottom) {
+            controlGimbal(3);
+        } else if (id == R.id.camera_conn) {
+            startConnection();
+        } else if (id == R.id.battery_info) {
+            startGetBatteryInfo();
+        } else if (id == R.id.control_mode) {
+            getRemoteControllerMode();
+        } else if (id == R.id.remote_control_japan) {
+            setRemoteControlMode(1);
+        } else if (id == R.id.remote_control_america) {
+            setRemoteControlMode(2);
+        } else if (id == R.id.take_picture_capacity) {
+            mPowerSDK.startRequestParameter(PVParameter.PV_CAM_SD_PLEFT);
+        } else if (id == R.id.reset) {
+            mPowerSDK.resetFactorySetting(7);
+        } else if (id == R.id.format_sd_card) {
+            mPowerSDK.formatSdCard(6);
+        } else if (id == R.id.camera_setting_hide) {
+            hideCameraSetting();
+        } else if (id == R.id.set_white_balance) {
+            setWhiteBalance();
         }
     }
 

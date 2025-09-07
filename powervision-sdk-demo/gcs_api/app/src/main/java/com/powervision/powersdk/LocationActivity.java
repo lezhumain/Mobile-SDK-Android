@@ -3,7 +3,7 @@ package com.powervision.powersdk;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,9 +23,6 @@ import com.powervision.powersdk.param.GlobalPositionIntParam;
 import com.powervision.powersdk.param.GpsRawIntParam;
 import com.powervision.powersdk.param.WaypointParam;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by simon
  * <p>
@@ -37,53 +34,30 @@ import butterknife.OnClick;
 public class LocationActivity extends BaseActivity {
     public static final String TAG = LocationActivity.class.getSimpleName();
 
-    @BindView(R.id.attitude_vx)
-    TextView attitudeVx;
-    @BindView(R.id.attitude_vy)
-    TextView attitudeVy;
-    @BindView(R.id.attitude_vz)
-    TextView attitudeVz;
-    @BindView(R.id.attitude_alt)
-    TextView attitudeAlt;
-    @BindView(R.id.attitude_relative_alt)
-    TextView attitudeRelativeAlt;
-    @BindView(R.id.attitude_relative_lat)
-    TextView attitudeRelativeLat;
-    @BindView(R.id.attitude_relative_lon)
-    TextView attitudeRelativeLon;
-    @BindView(R.id.attitude_pitch)
-    TextView attitudePitch;
-    @BindView(R.id.attitude_roll)
-    TextView attitudeRoll;
-    @BindView(R.id.attitude_yaw)
-    TextView attitudeYaw;
-    @BindView(R.id.excute_way_point)
-    Button excuteWayPoint;
+    private TextView attitudeVx;
+    private TextView attitudeVy;
+    private TextView attitudeVz;
+    private TextView attitudeAlt;
+    private TextView attitudeRelativeAlt;
+    private TextView attitudeRelativeLat;
+    private TextView attitudeRelativeLon;
+    private TextView attitudePitch;
+    private TextView attitudeRoll;
+    private TextView attitudeYaw;
+    private Button excuteWayPoint;
 
-    @BindView(R.id.attitude)
-    Button attitude;
-    @BindView(R.id.gps_info)
-    Button gpsInfo;
-    @BindView(R.id.connect_status)
-    Button connectStatus;
-    @BindView(R.id.set_way_point)
-    Button setWayPoint;
-    @BindView(R.id.automatically_return)
-    Button automaticallyReturn;
-    @BindView(R.id.point_1)
-    TextView point1;
-    @BindView(R.id.point_2)
-    TextView point2;
-    @BindView(R.id.point_3)
-    TextView point3;
-    @BindView(R.id.point_4)
-    TextView point4;
-    @BindView(R.id.way_points_layout)
-    LinearLayout wayPointsLayout;
-    @BindView(R.id.satellite_num)
-    TextView satelliteNum;
-    @BindView(R.id.back_last_mode)
-    Button backLastMode;
+    private Button attitude;
+    private Button gpsInfo;
+    private Button connectStatus;
+    private Button setWayPoint;
+    private Button automaticallyReturn;
+    private TextView point1;
+    private TextView point2;
+    private TextView point3;
+    private TextView point4;
+    private LinearLayout wayPointsLayout;
+    private TextView satelliteNum;
+    private Button backLastMode;
 
     private PowerSDK mPowerSDK;
     /**
@@ -120,6 +94,7 @@ public class LocationActivity extends BaseActivity {
 
     @Override
     protected void initListeners() {
+        initViews();
         mPowerSDK = PowerSDK.getInstance();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mPowerSDK.addConnectListener(simpleConnectListener);
@@ -135,34 +110,60 @@ public class LocationActivity extends BaseActivity {
         mPowerSDK.addStartWaypointListener(mStartWaypointListener);
     }
 
-    @OnClick({R.id.connect_status, R.id.attitude, R.id.gps_info, R.id.set_way_point
-            , R.id.automatically_return, R.id.excute_way_point, R.id.back_last_mode})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.connect_status:
-                startConnect();
-                break;
-            case R.id.attitude:
-                getAttitudeInfo();
-                break;
-            case R.id.gps_info:
-                getGPSInfo();
-                break;
-            case R.id.set_way_point:
-                setWayPoint();
-                break;
-            case R.id.excute_way_point:
-                excutePoints();
-                break;
-            case R.id.back_last_mode:
-                excuteBackLastMode();
-                break;
-            case R.id.automatically_return:
-                setAutomaticallyReturn();
-                break;
-        }
+    private void initViews() {
+        attitudeVx = findViewById(R.id.attitude_vx);
+        attitudeVy = findViewById(R.id.attitude_vy);
+        attitudeVz = findViewById(R.id.attitude_vz);
+        attitudeAlt = findViewById(R.id.attitude_alt);
+        attitudeRelativeAlt = findViewById(R.id.attitude_relative_alt);
+        attitudeRelativeLat = findViewById(R.id.attitude_relative_lat);
+        attitudeRelativeLon = findViewById(R.id.attitude_relative_lon);
+        attitudePitch = findViewById(R.id.attitude_pitch);
+        attitudeRoll = findViewById(R.id.attitude_roll);
+        attitudeYaw = findViewById(R.id.attitude_yaw);
+        excuteWayPoint = findViewById(R.id.excute_way_point);
+
+        attitude = findViewById(R.id.attitude);
+        gpsInfo = findViewById(R.id.gps_info);
+        connectStatus = findViewById(R.id.connect_status);
+        setWayPoint = findViewById(R.id.set_way_point);
+        automaticallyReturn = findViewById(R.id.automatically_return);
+        point1 = findViewById(R.id.point_1);
+        point2 = findViewById(R.id.point_2);
+        point3 = findViewById(R.id.point_3);
+        point4 = findViewById(R.id.point_4);
+        wayPointsLayout = findViewById(R.id.way_points_layout);
+        satelliteNum = findViewById(R.id.satellite_num);
+        backLastMode = findViewById(R.id.back_last_mode);
+
+        // Set click listeners
+        connectStatus.setOnClickListener(this::onViewClicked);
+        attitude.setOnClickListener(this::onViewClicked);
+        gpsInfo.setOnClickListener(this::onViewClicked);
+        setWayPoint.setOnClickListener(this::onViewClicked);
+        automaticallyReturn.setOnClickListener(this::onViewClicked);
+        excuteWayPoint.setOnClickListener(this::onViewClicked);
+        backLastMode.setOnClickListener(this::onViewClicked);
     }
 
+    public void onViewClicked(View view) {
+        int id = view.getId();
+        if (id == R.id.connect_status) {
+            startConnect();
+        } else if (id == R.id.attitude) {
+            getAttitudeInfo();
+        } else if (id == R.id.gps_info) {
+            getGPSInfo();
+        } else if (id == R.id.set_way_point) {
+            setWayPoint();
+        } else if (id == R.id.excute_way_point) {
+            excutePoints();
+        } else if (id == R.id.back_last_mode) {
+            excuteBackLastMode();
+        } else if (id == R.id.automatically_return) {
+            setAutomaticallyReturn();
+        }
+    }
     /**
      * 返回上一次飞行模式
      */
