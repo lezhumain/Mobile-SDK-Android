@@ -6,39 +6,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class FounctionListActivity extends AppCompatActivity {
 
-    @BindView(R.id.mount)
-    Button mount;
-    @BindView(R.id.camera)
-    Button camera;
-    @BindView(R.id.position)
-    Button position;
+    private Button mount;
+    private Button camera;
+    private Button position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_founction);
-        ButterKnife.bind(this);
 
+        mount = findViewById(R.id.mount);
+        camera = findViewById(R.id.camera);
+        position = findViewById(R.id.position);
+
+        mount.setOnClickListener(this::onViewClicked);
+        camera.setOnClickListener(this::onViewClicked);
+        position.setOnClickListener(this::onViewClicked);
     }
 
-    @OnClick({R.id.mount, R.id.camera, R.id.position})
     public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.mount:
-                startActivity(new Intent(this, MountActivity.class));
-                break;
-            case R.id.camera:
-                startActivity(new Intent(this, CameraActivity.class));
-                break;
-            case R.id.position:
-                startActivity(new Intent(this, LocationActivity.class));
-                break;
+        int id = view.getId();
+        if (id == R.id.mount) {
+            startActivity(new Intent(this, MountActivity.class));
+        } else if (id == R.id.camera) {
+            startActivity(new Intent(this, CameraActivity.class));
+        } else if (id == R.id.position) {
+            startActivity(new Intent(this, LocationActivity.class));
         }
     }
 

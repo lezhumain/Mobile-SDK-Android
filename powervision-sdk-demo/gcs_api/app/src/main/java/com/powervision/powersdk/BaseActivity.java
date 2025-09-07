@@ -4,8 +4,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by simon on 2017/12/15.
  */
@@ -25,7 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setContentLayoutView());
-        ButterKnife.bind(this);
         initListeners();
     }
 

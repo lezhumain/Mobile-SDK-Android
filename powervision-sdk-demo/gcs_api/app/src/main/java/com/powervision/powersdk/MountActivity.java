@@ -30,105 +30,55 @@ import com.powervision.powersdk.utils.ToastUtil;
 
 import java.nio.charset.Charset;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MountActivity extends AppCompatActivity {
 
     private static final String TAG = MountActivity.class.getSimpleName();
-    @BindView(R.id.connect_btn)
-    Button connectBtn;
-    @BindView(R.id.status_text)
-    TextView statusText;
-    @BindView(R.id.read_btn)
-    Button readBtn;
-    @BindView(R.id.clear_btn)
-    Button clearBtn;
-    @BindView(R.id.receive_content)
-    TextView receiveContent;
-    @BindView(R.id.send_btn)
-    Button sendBtn;
-    @BindView(R.id.send_content)
-
-    EditText sendContent;
-    @BindView(R.id.stop)
-    Button stop;
-    @BindView(R.id.port_spinner)
-    Spinner portSpinner;
-    @BindView(R.id.uart_bps_spinner)
-    Spinner uartBpsSpinner;
-    @BindView(R.id.uart_parity_spinner)
-    Spinner uartParitySpinner;
-    @BindView(R.id.uart_flowCtrl_spinner)
-    Spinner uartFlowCtrlSpinner;
-    @BindView(R.id.uart_layout)
-    LinearLayout uartLayout;
-    @BindView(R.id.can_bps_spinner)
-    Spinner canBpsSpinner;
-    @BindView(R.id.can_mode_spinner)
-    Spinner canModeSpinner;
-    @BindView(R.id.can_layout)
-    LinearLayout canLayout;
-    @BindView(R.id.i2c_mode_spinner)
-    Spinner i2cModeSpinner;
-    @BindView(R.id.i2c_speed_spinner)
-    Spinner i2cSpeedSpinner;
-    @BindView(R.id.i2c_mac_address)
-    EditText i2cMacAddress;
-    @BindView(R.id.i2c_layout)
-    LinearLayout i2cLayout;
-    @BindView(R.id.spi_mode_spinner)
-    Spinner spiModeSpinner;
-    @BindView(R.id.spi_speed_spinner)
-    Spinner spiSpeedSpinner;
-    @BindView(R.id.spi_effect_bit_spinner)
-    Spinner spiEffectBitSpinner;
-    @BindView(R.id.spi_data_size_spinner)
-    Spinner spiDataSizeSpinner;
-    @BindView(R.id.spi_crc_spinner)
-    Spinner spiCrcSpinner;
-    @BindView(R.id.spi_layout)
-    LinearLayout spiLayout;
-    @BindView(R.id.search_btn)
-    Button searchBtn;
-    @BindView(R.id.set_btn)
-    Button setBtn;
-    @BindView(R.id.uart_stopBits_spinner)
-    Spinner uartStopBitsSpinner;
-    @BindView(R.id.uart_dataBits_spinner)
-    Spinner uartDataBitsSpinner;
-    @BindView(R.id.set_port_btn)
-    Button setPortBtn;
-    @BindView(R.id.gpio_num_spinner)
-    Spinner gpioNumSpinner;
-    @BindView(R.id.gpio_low_last_time)
-    EditText gpioLowLastTime;
-    @BindView(R.id.gpio_periodRatio)
-    EditText gpioPeriodRatio;
-    @BindView(R.id.gpio_high_last_time)
-    EditText gpioHighLastTime;
-    @BindView(R.id.gpio_layout)
-    LinearLayout gpioLayout;
-    @BindView(R.id.can_filter_layout)
-    LinearLayout canFilterLayout;
-    @BindView(R.id.can_filter_serial_number)
-    EditText canFilterSerialNumber;
-    @BindView(R.id.can_filter_mode)
-    EditText canFilterMode;
-    @BindView(R.id.can_filter_match_id)
-    EditText canFilterMatchId;
-    @BindView(R.id.can_filter_hide_id)
-    EditText canFilterHideId;
-    @BindView(R.id.can_filter_id_type)
-    EditText canFilterIdType;
-    @BindView(R.id.can_filter_frame_type)
-    EditText canFilterFrameType;
-    @BindView(R.id.can_filter_enable)
-    EditText canFilterEnable;
-    @BindView(R.id.can_filter_delete_btn)
-    Button canFilterDeleteBtn;
-    @BindView(R.id.can_filter_delete_text)
-    EditText canFilterDeleteText;
+    private Button connectBtn;
+    private TextView statusText;
+    private Button readBtn;
+    private Button clearBtn;
+    private TextView receiveContent;
+    private Button sendBtn;
+    private EditText sendContent;
+    private Button stop;
+    private Spinner portSpinner;
+    private Spinner uartBpsSpinner;
+    private Spinner uartParitySpinner;
+    private Spinner uartFlowCtrlSpinner;
+    private LinearLayout uartLayout;
+    private Spinner canBpsSpinner;
+    private Spinner canModeSpinner;
+    private LinearLayout canLayout;
+    private Spinner i2cModeSpinner;
+    private Spinner i2cSpeedSpinner;
+    private EditText i2cMacAddress;
+    private LinearLayout i2cLayout;
+    private Spinner spiModeSpinner;
+    private Spinner spiSpeedSpinner;
+    private Spinner spiEffectBitSpinner;
+    private Spinner spiDataSizeSpinner;
+    private Spinner spiCrcSpinner;
+    private LinearLayout spiLayout;
+    private Button searchBtn;
+    private Button setBtn;
+    private Spinner uartStopBitsSpinner;
+    private Spinner uartDataBitsSpinner;
+    private Button setPortBtn;
+    private Spinner gpioNumSpinner;
+    private EditText gpioLowLastTime;
+    private EditText gpioPeriodRatio;
+    private EditText gpioHighLastTime;
+    private LinearLayout gpioLayout;
+    private LinearLayout canFilterLayout;
+    private EditText canFilterSerialNumber;
+    private EditText canFilterMode;
+    private EditText canFilterMatchId;
+    private EditText canFilterHideId;
+    private EditText canFilterIdType;
+    private EditText canFilterFrameType;
+    private EditText canFilterEnable;
+    private Button canFilterDeleteBtn;
+    private EditText canFilterDeleteText;
 
     private PowerSDK mPowerSDK;
     //1:UART 2:CAN 3:I2C 4:SPI
@@ -177,7 +127,7 @@ public class MountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        initViews();
 
         Log.e(TAG, "onCreate: ");
         initClickListener();
@@ -204,6 +154,55 @@ public class MountActivity extends AppCompatActivity {
         mPowerSDK.addInquireSoftVersionParamListener(inquireSoftVersionParamListener);
         mPowerSDK.addInquireHardVersionParamListener(inquireHardVersionParamListener);
         mPowerSDK.addCanFilterListener(canFilterListener);
+    }
+
+    private void initViews() {
+        connectBtn = findViewById(R.id.connect_btn);
+        statusText = findViewById(R.id.status_text);
+        readBtn = findViewById(R.id.read_btn);
+        clearBtn = findViewById(R.id.clear_btn);
+        receiveContent = findViewById(R.id.receive_content);
+        sendBtn = findViewById(R.id.send_btn);
+        sendContent = findViewById(R.id.send_content);
+        stop = findViewById(R.id.stop);
+        portSpinner = findViewById(R.id.port_spinner);
+        uartBpsSpinner = findViewById(R.id.uart_bps_spinner);
+        uartParitySpinner = findViewById(R.id.uart_parity_spinner);
+        uartFlowCtrlSpinner = findViewById(R.id.uart_flowCtrl_spinner);
+        uartLayout = findViewById(R.id.uart_layout);
+        canBpsSpinner = findViewById(R.id.can_bps_spinner);
+        canModeSpinner = findViewById(R.id.can_mode_spinner);
+        canLayout = findViewById(R.id.can_layout);
+        i2cModeSpinner = findViewById(R.id.i2c_mode_spinner);
+        i2cSpeedSpinner = findViewById(R.id.i2c_speed_spinner);
+        i2cMacAddress = findViewById(R.id.i2c_mac_address);
+        i2cLayout = findViewById(R.id.i2c_layout);
+        spiModeSpinner = findViewById(R.id.spi_mode_spinner);
+        spiSpeedSpinner = findViewById(R.id.spi_speed_spinner);
+        spiEffectBitSpinner = findViewById(R.id.spi_effect_bit_spinner);
+        spiDataSizeSpinner = findViewById(R.id.spi_data_size_spinner);
+        spiCrcSpinner = findViewById(R.id.spi_crc_spinner);
+        spiLayout = findViewById(R.id.spi_layout);
+        searchBtn = findViewById(R.id.search_btn);
+        setBtn = findViewById(R.id.set_btn);
+        uartStopBitsSpinner = findViewById(R.id.uart_stopBits_spinner);
+        uartDataBitsSpinner = findViewById(R.id.uart_dataBits_spinner);
+        setPortBtn = findViewById(R.id.set_port_btn);
+        gpioNumSpinner = findViewById(R.id.gpio_num_spinner);
+        gpioLowLastTime = findViewById(R.id.gpio_low_last_time);
+        gpioPeriodRatio = findViewById(R.id.gpio_periodRatio);
+        gpioHighLastTime = findViewById(R.id.gpio_high_last_time);
+        gpioLayout = findViewById(R.id.gpio_layout);
+        canFilterLayout = findViewById(R.id.can_filter_layout);
+        canFilterSerialNumber = findViewById(R.id.can_filter_serial_number);
+        canFilterMode = findViewById(R.id.can_filter_mode);
+        canFilterMatchId = findViewById(R.id.can_filter_match_id);
+        canFilterHideId = findViewById(R.id.can_filter_hide_id);
+        canFilterIdType = findViewById(R.id.can_filter_id_type);
+        canFilterFrameType = findViewById(R.id.can_filter_frame_type);
+        canFilterEnable = findViewById(R.id.can_filter_enable);
+        canFilterDeleteBtn = findViewById(R.id.can_filter_delete_btn);
+        canFilterDeleteText = findViewById(R.id.can_filter_delete_text);
     }
 
     private void initClickListener() {
